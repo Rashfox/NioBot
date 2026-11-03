@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# WhatsApp session and keys
+auth_session/
+
+# Environment variables
+.env
+.env.local
+
+# Local dynamic runtime data
+chat_history.json
+contacts.json
+*.backup.json
+
+# Temporary audio or media files
+*.mp3
+*.wav
+*.tmp

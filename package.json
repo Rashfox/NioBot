@@ -1,0 +1,19 @@
+{
+  "name": "rashbot",
+  "version": "1.0.0",
+  "description": "Rash Bot",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "@gradio/client": "^2.7.1",
+    "@whiskeysockets/baileys": "^6.7.0",
+    "msedge-tts": "^2.1.0",
+    "pino": "^9.0.0",
+    "qrcode-terminal": "^0.12.0",
+    "sharp": "^0.34.5"
+  }
+}
