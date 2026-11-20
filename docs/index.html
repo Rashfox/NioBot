@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11131b">
+  <meta name="description" content="Kenalan dengan Nio, bot asisten WhatsApp dengan AI, suara, stiker, dan fitur komunitas. Lihat demo dan panduan memulai.">
+  <title>Nio — Asisten AI di WhatsApp</title>
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#beranda" aria-label="Nio, ke beranda">
+      <img src="../assets/img/nio.jpg" class="brand-mark" alt="Icon Nio">
+      <span>Nio<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="main-nav" aria-label="Navigasi utama">
+      <a href="#fitur">Fitur</a>
+      <a href="#demo">Demo</a>
+      <a href="panduan.html">Panduan</a>
+      <a href="https://rashfox.github.io" target="_blank">Rash</a>
+    </nav>
+    <a class="button button-small button-outline header-cta" href="https://github.com/Rashfox/NioBot" target="_blank" rel="noreferrer">Lihat di GitHub <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main>
+    <section class="hero section-wrap" id="beranda">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot"></span> BOT WHATSAPP · OPEN SOURCE</p>
+        <h1>Teman pintar,<br><span class="gradient-text">langsung di chat.</span></h1>
+        <p class="hero-description">Kenalan dengan Nio — asisten WhatsApp yang siap diajak tanya jawab, bikin stiker, kirim suara, dan meramaikan grup.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#demo">Coba demo interaktif <span aria-hidden="true">→</span></a>
+          <a class="button button-text" href="panduan.html">Baca panduan <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="hero-note"><span aria-hidden="true">✦</span> Dibangun dengan Node.js · Dapat dikonfigurasi sendiri</div>
+      </div>
+
+      <div class="hero-visual" aria-label="Pratinjau percakapan Nio di WhatsApp">
+        <div class="orb orb-one"></div>
+        <div class="orb orb-two"></div>
+        <div class="chat-card">
+          <div class="chat-topbar">
+            <span class="back-arrow" aria-hidden="true">‹</span>
+            <div class="avatar">n<span>✦</span></div>
+            <div class="chat-contact"><strong>Nio Assistant</strong><small><span class="status-dot"></span> biasanya membalas cepat</small></div>
+            <span class="chat-menu" aria-hidden="true">•••</span>
+          </div>
+          <div class="chat-body">
+            <div class="date-pill">HARI INI</div>
+            <div class="message message-in">Hai! Ada yang bisa Nio bantu? 🌸<span class="message-time">09.41</span></div>
+            <div class="message message-out">.ai kasih ide caption buat foto senja<span class="message-time">09.42 <i>✓✓</i></span></div>
+            <div class="message message-in">Langit pamit, tapi warnanya masih tinggal. 🌅<br><br>Mau versi yang lebih puitis juga?<span class="message-time">09.42</span></div>
+            <div class="typing"><i></i><i></i><i></i><span>Nio sedang mengetik</span></div>
+          </div>
+          <div class="chat-input"><span>Ketik pesan</span><span class="input-icons" aria-hidden="true">☺　＋</span><span class="send-icon" aria-hidden="true">➤</span></div>
+        </div>
+        <div class="float-tag tag-ai"><span>✦</span> AI assistant</div>
+        <div class="float-tag tag-sticker">✿ stiker & suara</div>
+      </div>
+    </section>
+
+    <section class="proof-strip section-wrap" aria-label="Ringkasan fitur">
+      <div><strong>AI pilihanmu</strong><span>Gemini · OpenRouter · Ollama</span></div>
+      <div><strong>Ngobrol lebih natural</strong><span>Chat interaktif dengan Nio</span></div>
+      <div><strong>Kreatif di chat</strong><span>Stiker · meme · audio</span></div>
+    </section>
+
+    <section class="features-section section-wrap" id="fitur">
+      <div class="section-heading">
+        <p class="eyebrow">YANG BISA NIO LAKUKAN</p>
+        <h2>Satu chat, banyak kemungkinan.</h2>
+        <p>Fitur praktis untuk obrolan sehari-hari dan grup WhatsApp kamu.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card feature-card-wide">
+          <div class="feature-icon icon-purple">✦</div>
+          <span class="feature-label">TANYA APA SAJA</span>
+          <h3>AI yang bisa kamu atur</h3>
+          <p>Tanya lewat AI atau ngobrol santai dengan persona Nio. Pilih provider dan model sesuai konfigurasi kamu.</p>
+          <code>.ai Apa itu aurora?</code>
+          <div class="provider-pills"><span>Gemini</span><span>OpenRouter</span><span>Ollama</span></div>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon icon-pink">♫</div>
+          <span class="feature-label">DENGARKAN PESAN</span>
+          <h3>Suara dari teks</h3>
+          <p>Ubah teks jadi pesan suara dengan TTS standar atau pilihan suara anime.</p>
+          <code>.tts Halo semua!</code>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon icon-yellow">✿</div>
+          <span class="feature-label">EKSPRESIKAN DIRI</span>
+          <h3>Stiker & meme</h3>
+          <p>Buat stiker dari gambar atau GIF, ubah chat jadi quote, dan bikin meme langsung dari WhatsApp.</p>
+          <code>.stiker · .qc · .smeme</code>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon icon-blue">☾</div>
+          <span class="feature-label">TEMAN NGOBROL</span>
+          <h3>Chat tanpa awalan</h3>
+          <p>Mulai sesi chat dengan Nio. Percakapan bisa dilanjutkan tanpa mengetik command setiap kali.</p>
+          <code>.chatnio · .stopchat</code>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon icon-green">⌁</div>
+          <span class="feature-label">BANTUAN HARIAN</span>
+          <h3>Fitur untuk komunitas</h3>
+          <p>Cek jadwal sholat berdasarkan kota, kirim GIF reaksi, dan gunakan utilitas untuk grup.</p>
+          <code>.sholat Jakarta · .menugif</code>
+        </article>
+      </div>
+    </section>
+
+    <section class="demo-section" id="demo">
+      <div class="section-wrap demo-layout">
+        <div class="demo-copy">
+          <p class="eyebrow">COBA SENDIRI</p>
+          <h2>Rasakan cara kerja Nio.</h2>
+          <p>Masukkan contoh perintah atau pilih salah satu tombol. Demo ini berjalan di browser dan tidak mengirim pesan ke WhatsApp.</p>
+          <div class="demo-chips" aria-label="Contoh perintah">
+            <button type="button" class="command-chip" data-command=".ai kasih ide sarapan sehat">.ai</button>
+            <button type="button" class="command-chip" data-command=".menu">.menu</button>
+            <button type="button" class="command-chip" data-command=".tts Selamat pagi!">.tts</button>
+            <button type="button" class="command-chip" data-command=".sholat Jakarta">.sholat</button>
+          </div>
+          <a class="text-link" href="panduan.html">Pelajari semua perintah <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="demo-window">
+          <div class="demo-window-top"><div class="window-dots"><i></i><i></i><i></i></div><span>Demo chat Nio</span><span class="demo-badge">SIMULASI</span></div>
+          <div class="demo-messages" id="demo-messages" aria-live="polite" aria-label="Percakapan demo">
+            <div class="demo-message bot-message">Hai! Aku Nio 🌸 Coba ketik <b>.menu</b> atau tanyakan sesuatu dengan <b>.ai</b>.</div>
+          </div>
+          <form class="demo-form" id="demo-form">
+            <label class="sr-only" for="demo-input">Tulis pesan atau perintah untuk demo</label>
+            <input id="demo-input" type="text" placeholder="Ketik .ai, .menu, .tts..." autocomplete="off">
+            <button type="submit" aria-label="Kirim pesan">↑</button>
+          </form>
+          <p class="demo-disclaimer">Demo simulasi · tidak terhubung ke akun WhatsApp atau layanan AI</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="start-section section-wrap">
+      <div class="start-card">
+        <div>
+          <p class="eyebrow">SIAP KENALAN LEBIH DEKAT?</p>
+          <h2>Jalankan Nio milikmu.</h2>
+          <p>Ikuti panduan untuk memasang bot dan menautkan akun WhatsApp-mu.</p>
+        </div>
+        <div class="start-actions">
+          <a class="button button-primary" href="panduan.html">Mulai dari panduan <span aria-hidden="true">→</span></a>
+          <a class="button button-outline" href="https://github.com/Rashfox/NioBot" target="_blank" rel="noreferrer">Buka repository <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer section-wrap">
+    <a class="brand" href="#beranda" aria-label="Nio, ke beranda">
+      <img src="../assets/img/nio.jpg" class="brand-mark" alt="Icon Nio">
+      <span>Nio<span class="brand-dot">.</span></span>
+    </a>
+    <span>Diracik dengan ✦ oleh Rashfox</span>
+    <div class="nav-footer">
+      <a href="panduan.html">Panduan penggunaan</a>
+      <a href="https://rashfox.github.io" target="_blank">Rash</a>
+    </div>
+  </footer>
+</body>
+</html>

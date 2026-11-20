@@ -2,6 +2,8 @@
 
 Bot asisten WhatsApp interaktif yang ditenagai oleh **Google Gemini** dan arsitektur **OpenAI-Compatible AI Providers** (mendukung OpenRouter, Ollama/Local AI, Groq, DeepSeek, dll.).
 
+> 🌐 **[Lihat demo & situs Nio](https://rashfox.github.io/NioBot/)** · **[Baca panduan lengkap](https://rashfox.github.io/NioBot/panduan.html)**
+
 ---
 
 ## 🚀 Fitur Utama
@@ -27,8 +29,8 @@ Bot asisten WhatsApp interaktif yang ditenagai oleh **Google Gemini** dan arsite
 
 1. **Clone repository ini:**
    ```bash
-   git clone -b public-template https://github.com/Rashfox/RPRO.git
-   cd RPRO
+   git clone https://github.com/Rashfox/NioBot.git
+   cd NioBot
    ```
 
 2. **Install dependensi:**

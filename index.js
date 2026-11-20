@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { makeWASocket, useMultiFileAuthState, DisconnectReason, Browsers, fetchLatestBaileysVersion } from '@whiskeysockets/baileys';
 import pino from 'pino';
 import readline from 'readline';

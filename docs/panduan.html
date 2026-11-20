@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11131b">
+  <meta name="description" content="Panduan instalasi, pengaturan AI, login WhatsApp, dan daftar perintah bot Nio.">
+  <title>Panduan Nio — Instalasi & Perintah</title>
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Nio, ke beranda">
+      <img class="brand-mark" src="../assets/img/nio.jpg" alt="Icon Nio"><span>Nio<span class="brand-dot">.</span></span></a>
+    <nav class="main-nav" aria-label="Navigasi utama"><a href="index.html#fitur">Fitur</a><a href="index.html#demo">Demo</a><a class="nav-active" href="panduan.html">Panduan</a><a href="https://rashfox.github.io" target="_blank">Rash</a></nav>
+    <a class="button button-small button-outline header-cta" href="https://github.com/Rashfox/NioBot" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main class="guide-layout section-wrap">
+    <aside class="guide-sidebar">
+      <p class="eyebrow">DOKUMENTASI</p>
+      <a href="#persiapan">Persiapan</a>
+      <a href="#instalasi">Instalasi</a>
+      <a href="#login">Hubungkan WhatsApp</a>
+      <a href="#perintah">Perintah populer</a>
+      <a href="#ai">Atur provider AI</a>
+      <a href="#catatan">Catatan penting</a>
+    </aside>
+    <article class="guide-content">
+      <a class="back-link" href="index.html">← Kembali ke beranda</a>
+      <p class="eyebrow">MULAI DALAM BEBERAPA LANGKAH</p>
+      <h1>Panduan Nio</h1>
+      <p class="guide-intro">Pasang Nio di komputer atau server milikmu, sambungkan WhatsApp, lalu gunakan perintah lewat chat. Panduan ini untuk menjalankan bot dari source code.</p>
+
+      <div class="notice notice-warn"><strong>Perlu diketahui</strong><br>Nio adalah bot WhatsApp yang dijalankan di perangkat/server kamu, bukan aplikasi web yang bisa dijalankan dari halaman GitHub Pages. Demo di beranda hanya simulasi tampilan dan perintah.</div>
+
+      <section id="persiapan" class="guide-section">
+        <h2>1. Persiapan</h2>
+        <p>Pastikan perangkat sudah memiliki:</p>
+        <ul>
+          <li><a href="https://nodejs.org/" target="_blank" rel="noreferrer">Node.js 18 atau lebih baru</a> (disarankan versi LTS).</li>
+          <li><a href="https://ffmpeg.org/" target="_blank" rel="noreferrer">FFmpeg</a> terpasang dan tersedia di PATH untuk fitur stiker/video dan audio.</li>
+          <li>Akun WhatsApp untuk menautkan perangkat bot.</li>
+          <li>API key Gemini jika ingin menggunakan Google Gemini. Provider lain dapat dikonfigurasi setelah bot aktif.</li>
+        </ul>
+      </section>
+
+      <section id="instalasi" class="guide-section">
+        <h2>2. Instalasi</h2>
+        <p>Clone repository, lalu pasang dependensi:</p>
+        <pre><code>git clone https://github.com/Rashfox/NioBot.git
+cd NioBot
+npm install</code></pre>
+        <p>Salin template konfigurasi menjadi <code>.env</code> (di PowerShell gunakan <code>Copy-Item .env.example .env</code>), lalu isi konfigurasi dasarnya:</p>
+        <pre><code>cp .env.example .env</code></pre>
+        <pre><code>GEMINI_API_KEY=isi_api_key_kamu
+OWNER_NAME=NamaKamu
+OWNER_NUMBER=628xxxxxxxxxx
+OWNER_LID=
+BOT_PREFIX=.</code></pre>
+        <p><code>OWNER_NUMBER</code> gunakan kode negara tanpa tanda <code>+</code>. API key bersifat rahasia—jangan bagikan atau commit file <code>.env</code>.</p>
+        <p>Jalankan bot dengan:</p>
+        <pre><code>npm start</code></pre>
+      </section>
+
+      <section id="login" class="guide-section">
+        <h2>3. Hubungkan WhatsApp</h2>
+        <p>Saat pertama dijalankan, pilih salah satu metode login dari terminal:</p>
+        <ol>
+          <li><strong>Scan QR:</strong> buka WhatsApp → <em>Perangkat tertaut</em> → tautkan perangkat, lalu scan QR yang muncul di terminal.</li>
+          <li><strong>Pairing code:</strong> pilih opsi pairing, masukkan nomor dengan kode negara, lalu masukkan kode yang ditampilkan lewat menu perangkat tertaut WhatsApp.</li>
+        </ol>
+        <p>Sesi tersimpan pada folder <code>auth_session</code>. Jangan bagikan folder ini; siapa pun yang memilikinya mungkin dapat mengakses sesi bot.</p>
+      </section>
+
+      <section id="perintah" class="guide-section">
+        <h2>4. Perintah populer</h2>
+        <p>Prefix bawaan adalah titik (<code>.</code>). Kirim perintah ke chat pribadi atau grup yang diikuti bot.</p>
+        <div class="command-table" role="table" aria-label="Daftar perintah bot Nio">
+          <div class="command-row command-head" role="row"><span role="columnheader">Perintah</span><span role="columnheader">Kegunaan</span></div>
+          <div class="command-row" role="row"><code>.menu</code><span>Melihat menu perintah bot.</span></div>
+          <div class="command-row" role="row"><code>.ai &lt;pertanyaan&gt;</code><span>Mengirim pertanyaan ke provider AI aktif.</span></div>
+          <div class="command-row" role="row"><code>.nio &lt;pesan&gt;</code><span>Ngobrol dengan persona Nio.</span></div>
+          <div class="command-row" role="row"><code>.chatnio</code><span>Memulai chat tanpa prefix; sesi berakhir setelah 10 menit tidak aktif.</span></div>
+          <div class="command-row" role="row"><code>.stopchat</code><span>Mengakhiri sesi chat interaktif.</span></div>
+          <div class="command-row" role="row"><code>.tts &lt;teks&gt;</code><span>Mengubah teks menjadi pesan suara.</span></div>
+          <div class="command-row" role="row"><code>.ttsanime &lt;teks&gt;</code><span>Membuat pesan suara dengan pilihan suara anime.</span></div>
+          <div class="command-row" role="row"><code>.stiker</code><span>Balas/kirim gambar atau video pendek dengan caption perintah untuk membuat stiker.</span></div>
+          <div class="command-row" role="row"><code>.qc &lt;teks&gt;</code><span>Membuat stiker quote chat.</span></div>
+          <div class="command-row" role="row"><code>.smeme teks atas | teks bawah</code><span>Membuat meme dari teks.</span></div>
+          <div class="command-row" role="row"><code>.sholat &lt;kota&gt;</code><span>Melihat jadwal sholat untuk kota yang dicari.</span></div>
+          <div class="command-row" role="row"><code>.menugif</code><span>Melihat kategori GIF/stiker animasi.</span></div>
+          <div class="command-row" role="row"><code>.ping</code><span>Memeriksa respons bot.</span></div>
+        </div>
+        <p>Beberapa perintah tambahan tersedia di <code>.menu</code>. Pengelolaan provider dan sejumlah perintah profil hanya dapat digunakan oleh owner.</p>
+      </section>
+
+      <section id="ai" class="guide-section">
+        <h2>5. Atur provider AI</h2>
+        <p>Gemini, OpenRouter, dan endpoint lokal OpenAI-compatible (misalnya Ollama) dapat dikelola melalui chat sebagai owner:</p>
+        <ul>
+          <li><code>.setai</code> — lihat provider yang tersedia dan statusnya.</li>
+          <li><code>.setai &lt;provider&gt;</code> — pilih provider, misalnya <code>.setai gemini</code>.</li>
+          <li><code>.setaimodel [provider] &lt;model&gt;</code> — pilih model untuk provider.</li>
+          <li><code>.setaikey [provider] &lt;api_key&gt;</code> — simpan API key provider.</li>
+          <li><code>.setaiurl [provider] &lt;url&gt;</code> — atur URL untuk endpoint yang kompatibel.</li>
+          <li><code>.addai &lt;id&gt; &lt;nama&gt; &lt;baseUrl&gt; &lt;model&gt; [apiKey]</code> — tambahkan provider kustom.</li>
+          <li><code>.delai &lt;id&gt;</code> — hapus provider kustom.</li>
+        </ul>
+        <p>Contoh format persis dapat dilihat dengan mengetik perintah tanpa argumen. Jangan mengirim API key ke chat grup.</p>
+      </section>
+
+      <section id="catatan" class="guide-section">
+        <h2>Catatan penting</h2>
+        <ul>
+          <li>Fitur pengingat sholat otomatis saat ini dijadwalkan untuk wilayah Cilacap.</li>
+          <li>Stiker animasi dari video/GIF memiliki batas durasi 10 detik dan memerlukan FFmpeg.</li>
+          <li>Bot bergantung pada koneksi internet, provider AI, serta layanan eksternal yang digunakan masing-masing fitur.</li>
+          <li>Gunakan bot sesuai aturan WhatsApp dan layanan yang terhubung. Penggunaan yang berlebihan dapat menyebabkan pembatasan akun.</li>
+        </ul>
+        <div class="notice"><strong>Masih butuh bantuan?</strong><br>Kunjungi <a href="https://github.com/Rashfox/NioBot" target="_blank" rel="noreferrer">repository Nio di GitHub</a> untuk melihat source code dan informasi proyek.</div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="site-footer section-wrap">
+    <a class="brand" href="index.html" aria-label="Nio, ke beranda">
+      <img class="brand-mark" src="../assets/img/nio.jpg" alt="Icon Nio"><span>Nio<span class="brand-dot">.</span></span></a>
+    <span>Diracik dengan ✦ oleh Rashfox</span>
+    <div class="nav-footer">
+      <a href="index.html">Kembali ke beranda</a>
+      <a href="https://rashfox.github.io" target="_blank">Rash</a>
+    </div>
+  </footer>
+</body>
+</html>

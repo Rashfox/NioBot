@@ -11,6 +11,7 @@
     "@google/generative-ai": "^0.21.0",
     "@gradio/client": "^2.7.1",
     "@whiskeysockets/baileys": "^6.7.0",
+    "dotenv": "^16.6.1",
     "msedge-tts": "^2.1.0",
     "pino": "^9.0.0",
     "qrcode-terminal": "^0.12.0",
