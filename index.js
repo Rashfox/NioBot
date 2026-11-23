@@ -6,6 +6,7 @@ import fs from 'fs';
 import { loadCommands, getCommand, commands } from './features/index.js';
 import { nio_core, isChatMode, resetChatTimer } from './features/nio.js';
 import { readDB, writeDB } from './features/state.js';
+import { startPrayerReminder } from './features/sholat.js';
 import qrcode from 'qrcode-terminal';
 
 // Setup untuk membaca input nomor dari terminal
@@ -40,11 +41,6 @@ let pairingCodeRequested = false; // Penanda untuk mencegah spam OTP
 const dbInit = readDB();
 const interactedUsers = new Set(dbInit.interactedUsers || []);
 
-// Variabel untuk pengingat sholat otomatis
-let isReminderActive = false;
-let todayPrayerTimes = null;
-let lastFetchDate = '';
-
 // Setup untuk Contacts lokal (menyimpan nama WA agar tidak perlu Baileys Store yang rawan error)
 const contactsFile = './contacts.json';
 let contacts = {};
@@ -61,92 +57,6 @@ if (fs.existsSync(contactsFile)) {
     } catch (e) {
         contacts = {};
     }
-}
-
-// Fungsi untuk menjalankan pengingat waktu sholat di latar belakang
-function startPrayerReminder(sock) {
-    setInterval(async () => {
-        const now = new Date();
-        // Menyesuaikan waktu bot dengan zona waktu WIB (Waktu Indonesia Barat)
-        const wibTime = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Jakarta" }));
-        const y = wibTime.getFullYear();
-        const m = String(wibTime.getMonth() + 1).padStart(2, '0');
-        const d = String(wibTime.getDate()).padStart(2, '0');
-        const currentDateStr = `${y}-${m}-${d}`;
-        
-        const hours = String(wibTime.getHours()).padStart(2, '0');
-        const minutes = String(wibTime.getMinutes()).padStart(2, '0');
-        const currentTimeStr = `${hours}:${minutes}`;
-
-        // Mengambil jadwal sholat Cilacap satu kali setiap harinya (agar tidak membebani API)
-        if (lastFetchDate !== currentDateStr) {
-            try {
-                const cariRes = await fetch(`https://api.myquran.com/v2/sholat/kota/cari/cilacap`);
-                const cariJson = await cariRes.json();
-                if (cariJson.status && cariJson.data && cariJson.data.length > 0) {
-                    const idKota = cariJson.data[0].id;
-                    const sholatRes = await fetch(`https://api.myquran.com/v2/sholat/jadwal/${idKota}/${y}/${m}/${d}`);
-                    const sholatJson = await sholatRes.json();
-                    if (sholatJson.status && sholatJson.data) {
-                        todayPrayerTimes = sholatJson.data.jadwal;
-                        lastFetchDate = currentDateStr;
-                        console.log(`✅ Jadwal sholat otomatis area Cilacap berhasil diperbarui.`);
-                    }
-                }
-            } catch (e) {
-                console.log('Gagal mengambil jadwal sholat otomatis:', e.message);
-            }
-        }
-
-        // Mencocokkan waktu saat ini dengan jadwal sholat Cilacap
-        if (todayPrayerTimes) {
-            const timesToRemind = [
-                { name: 'Subuh', time: todayPrayerTimes.subuh },
-                { name: 'Dzuhur', time: todayPrayerTimes.dzuhur },
-                { name: 'Ashar', time: todayPrayerTimes.ashar },
-                { name: 'Maghrib', time: todayPrayerTimes.maghrib },
-                { name: 'Isya', time: todayPrayerTimes.isya }
-            ];
-
-            for (const prayer of timesToRemind) {
-                if (currentTimeStr === prayer.time) {
-                    // Memastikan pengumuman hanya dikirim 1 kali di menit tersebut
-                    if (!todayPrayerTimes[`${prayer.name}_notified`]) {
-                        todayPrayerTimes[`${prayer.name}_notified`] = true;
-                        const msg = `📢 *PENGINGAT WAKTU SHOLAT*\n\nTelah masuk waktu *${prayer.name}* untuk wilayah *Cilacap* dan sekitarnya (Pukul ${prayer.time} WIB).\n\nMari sejenak tinggalkan aktivitas dan segera dirikan sholat! 🕌`;
-                        
-                        try {
-                            // 1. Ambil semua grup yang diikuti bot
-                            const groups = await sock.groupFetchAllParticipating();
-                            const groupJids = Object.keys(groups);
-
-                            // 2. Ambil semua pengguna yang terdaftar di DB
-                            const db = readDB();
-                            const registeredUserJids = db.users ? Object.keys(db.users) : [];
-
-                            // 3. Gabungkan semua target (grup, user terdaftar, dan yang pernah chat) menjadi satu set unik
-                            const allTargetJids = new Set([
-                                ...groupJids, 
-                                ...registeredUserJids, 
-                                ...interactedUsers
-                            ]);
-
-                            console.log(`📢 Mengirim pengingat sholat ${prayer.name} ke ${allTargetJids.size} target...`);
-
-                            // 4. Kirim pesan ke setiap target
-                            for (const jid of allTargetJids) {
-                                await sock.sendMessage(jid, { text: msg });
-                                await new Promise(resolve => setTimeout(resolve, 200)); // Jeda 200ms untuk menghindari spam
-                            }
-                            console.log(`✅ Berhasil mengirim pengingat sholat ${prayer.name} ke seluruh target.`);
-                        } catch (e) {
-                            console.log('❌ Gagal mengirim pengingat sholat massal:', e.message);
-                        }
-                    }
-                }
-            }
-        }
-    }, 60000); // Interval berjalan setiap 1 menit (60.000 milidetik)
 }
 
 async function connectToWhatsApp() {
@@ -240,10 +150,7 @@ async function connectToWhatsApp() {
             }
         } else if (connection === 'open') {
             console.log('✅ Bot berhasil terhubung ke WhatsApp!');
-            if (!isReminderActive) {
-                isReminderActive = true;
-                startPrayerReminder(sock);
-            }
+            startPrayerReminder(sock);
         }
     });
 

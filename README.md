@@ -11,7 +11,7 @@ Bot asisten WhatsApp interaktif yang ditenagai oleh **Google Gemini** dan arsite
 - 🤖 **Multi-Provider AI Assistant:** Dukungan Google Gemini, OpenRouter.ai, dan Local AI (Ollama).
 - 🎙️ **Voice & Audio (TTS):** Microsoft Edge TTS & Voicevox anime voice generator.
 - 🎨 **Sticker & Meme Generator:** Pembuatan stiker statis, animasi GIF, stiker quote chat (`.qc`), dan meme (`.smeme` & `.smemegif`).
-- 🕌 **Pengingat Sholat:** Notifikasi otomatis waktu sholat per wilayah (WIB).
+- 🕌 **Pengingat Sholat:** Notifikasi otomatis wilayah Cilacap, hanya untuk chat yang berlangganan.
 - 💬 **Interactive Chatting:** Mode ngobrol interaktif (`.chatnio`).
 - ⚙️ **Dinamis & Modular:** Manajemen konfigurasi provider AI dan model langsung lewat perintah bot.
 
@@ -72,6 +72,17 @@ Sebagai pemilik bot (*owner*), Anda dapat mengelola model dan provider AI langsu
 - `.setaimodel [provider] <nama_model>` — Mengatur model AI yang digunakan.
 - `.setaikey [provider] <api_key>` — Menyimpan API key untuk provider terkait.
 - `.addai <id> <nama> <baseUrl> <model> [apiKey]` — Menambahkan API pihak ketiga baru secara dinamis.
+
+---
+
+## 🕌 Pengingat Sholat
+
+- `.sholat <kota>` — cek jadwal sholat untuk kota tertentu.
+- `.sholat on` — berlangganan pengingat otomatis di chat saat ini.
+- `.sholat off` — berhenti berlangganan di chat saat ini.
+- `.sholat status` — cek status langganan chat saat ini.
+
+Pengingat otomatis mengikuti jadwal wilayah Cilacap dan hanya dikirim ke chat yang memilih berlangganan. Aktifkan perintah di chat pribadi atau grup yang ingin menerima pengingat; bot tidak mengirimkannya ke semua kontak atau grup.
 
 ---
 
