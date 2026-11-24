@@ -43,7 +43,7 @@ async function sendAnimeImage(sock, remoteJid, msg, reply, category, senderName)
                 // Format wajib untuk API seperti maids.best: APP_NAME (CONTACT_INFO).
                 // Nama generik seperti "WhatsApp Bot"/"Discord Bot" otomatis diblokir mereka.
                 // Ganti URL di bawah dengan repo/kontak project kamu yang sebenarnya.
-                'User-Agent': 'RashBot/1.0 (https://github.com/ganti-dengan-repo-kamu/rashbot)',
+                'User-Agent': 'RashBot/1.0 (https://github.com/Rashfox/NioBot)',
                 'Accept': 'application/json'
             }
         });
@@ -99,6 +99,7 @@ async function sendAnimeImage(sock, remoteJid, msg, reply, category, senderName)
         // --- API Fallback jika API utama gagal atau sedang maintenance ---
         const fallbackApis = {
             'waifu': [
+                { url: `https://api.nekosia.cat/api/v1/images/random?count=1&additionalTags=1girl`, get: (d) => d.image?.original?.url},
                 { url: `https://api.marek-server.com/images?IncludedTags=waifu&IsNsfw=false&PageSize=1`, get: (d) => d.items?.[0]?.url },
                 { url: 'https://maids.best/api/v2/waifu', get: (d) => d.results?.[0]?.url },
                 { url: 'https://api.waifu.pics/sfw/waifu', get: (d) => d.url },
@@ -108,6 +109,7 @@ async function sendAnimeImage(sock, remoteJid, msg, reply, category, senderName)
                 { url: 'https://nekobot.xyz/api/image?type=neko', get: (d) => d.success ? d.message : null }
             ],
             'neko': [
+                { url: `https://api.nekosia.cat/api/v1/images/catgirl?count=1&additionalTags=1girl`, get: (d) => d.image?.original?.url},
                 { url: `https://api.marek-server.com/images?IncludedTags=neko&IsNsfw=false&PageSize=1`, get: (d) => d.items?.[0]?.url },
                 { url: 'https://nekos.best/api/v2/neko', get: (d) => d.results?.[0]?.url },
                 { url: 'https://nekos.life/api/v2/img/neko', get: (d) => d.url },
@@ -115,6 +117,7 @@ async function sendAnimeImage(sock, remoteJid, msg, reply, category, senderName)
                 { url: 'https://api.waifu.pics/sfw/neko', get: (d) => d.url }
             ],
             'maid': [
+                { url: `https://api.nekosia.cat/api/v1/images/maid?count=1&additionalTags=1girl`, get: (d) => d.image?.original?.url},
                 { url: `https://api.marek-server.com/images?IncludedTags=maid&IsNsfw=false  &PageSize=1`, get: (d) => d.items?.[0]?.url },
                 { url: 'https://api.waifu.pics/sfw/maid', get: (d) => d.url },
                 { url: 'https://maids.best/api/v2/maid', get: (d) => d.results?.[0]?.url },

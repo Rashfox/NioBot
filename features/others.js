@@ -72,7 +72,10 @@ export default [
 
             await sock.sendMessage(remoteJid, {
                 image: { url: 'assets/img/nio.jpg' },
-                caption: menuText
+                caption: menuText.replace(
+                    '\n🕌 *Pengingat Ibadah:*',
+                    `\n📚 *MangaDex:*\n- ${prefix}manga <judul>\n- ${prefix}manga tag <genre/tag>\n- ${prefix}manga chapter <jumlah>\n\n🌏 *Info Gempa BMKG:*\n- ${prefix}gempa\n- ${prefix}gempa on/off (notifikasi per chat)\n\n🕌 *Pengingat Ibadah:*`
+                )
             }, { quoted: msg });
         }
     }

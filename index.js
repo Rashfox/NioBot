@@ -6,6 +6,7 @@ import fs from 'fs';
 import { loadCommands, getCommand, commands } from './features/index.js';
 import { nio_core, isChatMode, resetChatTimer } from './features/nio.js';
 import { readDB, writeDB } from './features/state.js';
+import { startEarthquakeMonitor } from './features/gempa.js';
 import { startPrayerReminder } from './features/sholat.js';
 import qrcode from 'qrcode-terminal';
 
@@ -150,6 +151,7 @@ async function connectToWhatsApp() {
             }
         } else if (connection === 'open') {
             console.log('✅ Bot berhasil terhubung ke WhatsApp!');
+            startEarthquakeMonitor(sock);
             startPrayerReminder(sock);
         }
     });

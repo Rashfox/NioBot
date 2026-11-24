@@ -11,6 +11,8 @@ Bot asisten WhatsApp interaktif yang ditenagai oleh **Google Gemini** dan arsite
 - 🤖 **Multi-Provider AI Assistant:** Dukungan Google Gemini, OpenRouter.ai, dan Local AI (Ollama).
 - 🎙️ **Voice & Audio (TTS):** Microsoft Edge TTS & Voicevox anime voice generator.
 - 🎨 **Sticker & Meme Generator:** Pembuatan stiker statis, animasi GIF, stiker quote chat (`.qc`), dan meme (`.smeme` & `.smemegif`).
+- 📚 **Pencarian MangaDex:** Cari judul, rekomendasi berdasarkan genre/tag, atau filter berdasarkan jumlah chapter.
+- 🌏 **Info Gempa BMKG:** Info gempa terkini dan notifikasi otomatis untuk chat yang berlangganan.
 - 🕌 **Pengingat Sholat:** Notifikasi otomatis wilayah Cilacap, hanya untuk chat yang berlangganan.
 - 💬 **Interactive Chatting:** Mode ngobrol interaktif (`.chatnio`).
 - ⚙️ **Dinamis & Modular:** Manajemen konfigurasi provider AI dan model langsung lewat perintah bot.
@@ -72,6 +74,26 @@ Sebagai pemilik bot (*owner*), Anda dapat mengelola model dan provider AI langsu
 - `.setaimodel [provider] <nama_model>` — Mengatur model AI yang digunakan.
 - `.setaikey [provider] <api_key>` — Menyimpan API key untuk provider terkait.
 - `.addai <id> <nama> <baseUrl> <model> [apiKey]` — Menambahkan API pihak ketiga baru secara dinamis.
+
+---
+
+## 📚 Pencarian MangaDex
+
+- `.manga <judul>` — Cari manga berdasarkan judul.
+- `.manga tag <genre/tag>` — Rekomendasi maksimal 5 manga terpopuler yang cocok; beberapa tag dapat dipisahkan dengan koma.
+- `.manga chapter <jumlah>` — Cari manga dengan jumlah chapter tepat. Pemeriksaan dibatasi ke 30 manga terpopuler karena MangaDex menghitung chapter melalui endpoint agregat.
+
+Hasil ditampilkan sebagai gambar cover dan detail manga, dengan tautan **Baca di MangaDex** yang bisa dibuka langsung.
+
+---
+
+## 🌏 Info Gempa BMKG
+
+- `.gempa` — tampilkan info gempa terbaru dari feed BMKG.
+- `.gempa on` — aktifkan notifikasi pembaruan untuk chat saat ini.
+- `.gempa off` — berhenti berlangganan di chat saat ini.
+
+Feed BMKG diperiksa setiap menit. Saat bot pertama kali tersambung, feed disinkronkan tanpa mengirim notifikasi lama; notifikasi dikirim untuk pembaruan berikutnya. Informasi berasal dari feed BMKG dan bukan pengganti arahan resmi.
 
 ---
 
